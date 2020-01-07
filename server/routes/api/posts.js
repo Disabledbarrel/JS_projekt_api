@@ -10,6 +10,8 @@ router.get("/", async (req, res) => {
   res.send(await posts.find({}).toArray()); // Hämtar alla poster från databasen
 });
 
+// Get enskild post
+
 // Add Posts
 router.post("/", async (req, res) => {
   const posts = await loadPostsCollection();
