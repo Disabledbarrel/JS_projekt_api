@@ -2,18 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-// Databasanslutning
-mongoose.connect(
-  "mongodb+srv://disabledbarrel:<password>@vue-express-ebdrj.mongodb.net/test?retryWrites=true&w=majority",
-  {
-    useUnifiedTopology: true
-  }
-);
-
-// Skapa instans av express
+// Skapa instans av express, initierar appen
 const app = express();
 
-// Middleware
+// Middleware för dependencies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
@@ -21,6 +13,7 @@ app.use(cors());
 // Routes
 const posts = require("./routes/api/posts");
 
+// Dirigerar till posts
 app.use("/api/posts", posts);
 
 // Port för anslutning
