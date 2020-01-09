@@ -22,22 +22,37 @@
       >
         <p class="text">{{ post.text }}</p>
         <button v-on:click="deletePost(post._id)">Radera</button>
+        <button v-on:click="toggleBottomBar(post._id)">
+          Uppdatera
+        </button>
       </div>
     </div>
+    <UpdatePostComponent
+      ref="updatePostComponent"
+      v-bind:should-render="showBottomBar"
+      v-bind:post-id="currentPostId"
+      @update-post="read"
+    />
   </div>
 </template>
 
 <script>
 import PostService from "../PostService"; // importerar service-klassen
+import UpdatePostComponent from "./UpdatePostComponent";
 
 export default {
   name: "PostComponent",
+  components: {
+    UpdatePostComponent
+  },
   // Data associerad med komponenten
   data() {
     return {
       posts: [],
       error: "",
-      text: ""
+      text: "",
+      showBottomBar: false,
+      currentPostId: 0 // startvärde
     };
   },
   async created() {
@@ -56,9 +71,13 @@ export default {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
     },
-    async updatePost(id) {
-      await PostService.updatePost(id);
-      this.posts = await PostService.getPosts();
+    toggleBottomBar(id) {
+      this.showBottomBar = !this.showBottomBar;
+      this.currentPostId = id;
+    },
+    async read() {
+      this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
+      this.showBottomBar = !this.showBottomBar;
     }
   }
 };
