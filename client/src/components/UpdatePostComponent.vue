@@ -28,6 +28,9 @@ export default {
       } else {
         this.updateError = "Du får inte lägga till en tom todo";
       }
+    },
+    setText(text) {
+      this.text = text;
     }
   }
 };

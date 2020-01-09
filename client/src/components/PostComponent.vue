@@ -3,13 +3,7 @@
     <h1>Middagsplanering</h1>
     <div class="create-post">
       <label for="create-post">Lägg till todo:</label>
-      <input
-        type="text"
-        id="create-post"
-        v-model="text"
-        placeholder="Lägg till todo"
-        required
-      />
+      <input type="text" id="create-post" v-model="text" placeholder="Lägg till todo" required />
       <button v-on:click="createPost">Lägg till</button>
     </div>
     <p class="error" v-if="error">{{ error }}</p>
@@ -25,7 +19,7 @@
         <button v-on:click="deletePost(post._id)">
           <i class="fas fa-check-circle"></i>
         </button>
-        <button v-on:click="toggleBottomBar(post._id)">
+        <button v-on:click="toggleBottomBar(post._id, post.text)">
           <i class="far fa-edit"></i>
         </button>
       </div>
@@ -80,13 +74,14 @@ export default {
       await PostService.deletePost(id);
       this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
     },
-    toggleBottomBar(id) {
+    toggleBottomBar(id, text) {
       this.showBottomBar = !this.showBottomBar;
       this.currentPostId = id;
+      this.$refs.updatePostComponent.setText(text);
     },
     async read() {
       this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
-      this.showBottomBar = !this.showBottomBar;
+      this.showBottomBar = false;
     }
   }
 };
