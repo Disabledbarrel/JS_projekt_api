@@ -8,6 +8,7 @@
         id="create-post"
         v-model="text"
         placeholder="Lägg till todo"
+        required
       />
       <button v-on:click="createPost">Lägg till</button>
     </div>
@@ -21,9 +22,11 @@
         v-bind:key="post._id"
       >
         <p class="text">{{ post.text }}</p>
-        <button v-on:click="deletePost(post._id)">Radera</button>
+        <button v-on:click="deletePost(post._id)">
+          <i class="fas fa-check-circle"></i>
+        </button>
         <button v-on:click="toggleBottomBar(post._id)">
-          Uppdatera
+          <i class="far fa-edit"></i>
         </button>
       </div>
     </div>
@@ -64,8 +67,14 @@ export default {
   },
   methods: {
     async createPost() {
-      await PostService.insertPost(this.text);
-      this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
+      if (this.text != "") {
+        await PostService.insertPost(this.text);
+        this.posts = await PostService.getPosts(); // Läser in från vår skapade service-klass
+        this.error = "";
+        this.text = "";
+      } else {
+        this.error = "Du får inte lägga till en tom todo";
+      }
     },
     async deletePost(id) {
       await PostService.deletePost(id);

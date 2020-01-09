@@ -4,7 +4,8 @@
       type="text"
       id="update-post"
       v-model="text"
-      placeholder="Uppdatera till todo"
+      placeholder="Uppdatera todo"
+      required
     />
     <button v-on:click="updatePost(postId)">Uppdatera</button>
   </div>
@@ -23,8 +24,10 @@ export default {
   },
   methods: {
     async updatePost(id) {
-      await PostService.updatePost(id, this.text);
-      this.$emit("update-post");
+      if (this.text != "") {
+        await PostService.updatePost(id, this.text);
+        this.$emit("update-post");
+      }
     }
   }
 };
