@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/dinner.jpg" />
     <PostComponent />
   </div>
 </template>
@@ -26,5 +25,11 @@ export default {
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
+}
+#app {
+  width: 1200px;
+  background-image: url("./assets/background.jpg");
+  height: 803px;
+  margin: auto auto;
 }
 </style>
