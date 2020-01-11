@@ -10,7 +10,7 @@
         placeholder="Lägg till todo"
         required
       />
-      <button v-on:click="createPost">Lägg till</button>
+      <button id="add" v-on:click="createPost">Lägg till</button>
     </div>
     <p class="error" v-if="error">{{ error }}</p>
     <div class="post-container">
@@ -124,7 +124,6 @@ h1 {
 button {
   cursor: pointer;
   padding: 5px;
-  border-color: rgb(54, 53, 53);
   border-radius: 4px;
   border: 1px solid;
   background: rgb(240, 235, 227);
@@ -151,6 +150,9 @@ input[type="text"]:focus {
 .create-post {
   text-align: right;
 }
+#add {
+  border-color: rgb(141, 135, 135);
+}
 .post {
   display: grid;
   grid-template: 1fr 1fr;
@@ -168,18 +170,20 @@ input[type="text"]:focus {
   font-size: 15px;
   padding: 5px;
   width: 50px;
+  border-color: rgb(141, 135, 135);
 }
 .check {
   padding: 0;
   width: 30px;
   margin: 0;
   color: green;
-  border-color: rgb(54, 53, 53);
+  border-color: rgb(141, 135, 135);
 }
 .edit {
   padding: 0;
   width: 30px;
   margin: 0;
+  border-color: rgb(141, 135, 135);
 }
 .error {
   color: red;

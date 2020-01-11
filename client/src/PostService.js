@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // url för proxy
-const url = "http://localhost:5000/api/posts/";
+const url = "api/posts/";
 
 // Skapar klass för CRUD
 class PostService {
